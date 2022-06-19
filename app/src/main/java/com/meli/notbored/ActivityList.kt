@@ -3,9 +3,7 @@ package com.meli.notbored
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
-import android.view.View.TEXT_ALIGNMENT_CENTER
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,6 +26,7 @@ class ActivityList : AppCompatActivity() {
         )
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val recycler = binding.lisActivity
         val list= mutableListOf<Activity>()
@@ -56,10 +55,10 @@ class ActivityList : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.random -> {
-                //newGame()
+                Toast.makeText(baseContext, "OUTRA ACTIVITY AQUI", Toast.LENGTH_LONG).show()
                 true
             }
-            androidx.appcompat.R.id.home -> {
+            android.R.id.home -> {
                 finish()
                 true
             }
