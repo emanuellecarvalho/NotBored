@@ -25,16 +25,8 @@
             app:titleCentered="true"
             app:menu="@menu/menu"
             style="@style/Bar">
-
-            <!--<TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Activities"
-                android:layout_gravity="center"
-                android:id="@+id/toolbar_title"
-                style="@style/Bar"/>-->
-
         </com.google.android.material.appbar.MaterialToolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

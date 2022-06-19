@@ -10,8 +10,9 @@ import com.meli.notbored.R
 import com.meli.notbored.domain.Activity
 
 class AdapterListActivities(
-    val list: List<Activity>,
+    private val list: MutableList<Activity>,
     val onClick: (Activity)->Unit):
+
     RecyclerView.Adapter<AdapterListActivities.ActivitityViewHolder>(){
 
     class ActivitityViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -26,7 +27,7 @@ class AdapterListActivities(
 
     override fun onBindViewHolder(holder: ActivitityViewHolder, position: Int) {
         val activity = list[position]
-        holder.activities.text = activity.cativity
+        holder.activities.text = activity.activity
         holder.container.setOnClickListener(View.OnClickListener { onClick(activity) })
     }
 

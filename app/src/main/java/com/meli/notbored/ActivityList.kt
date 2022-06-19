@@ -2,21 +2,27 @@ package com.meli.notbored
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meli.notbored.adapters.AdapterListActivities
 import com.meli.notbored.databinding.ActivityListBinding
 import com.meli.notbored.domain.Activity
+import com.meli.notbored.viewmodel.ModelActivityList
 
 class ActivityList : AppCompatActivity() {
-    private lateinit var binding: ActivityListBinding
+    private var _binding: ActivityListBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: ModelActivityList by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityListBinding.inflate(layoutInflater)
+        _binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val toolbar = binding.toolbar
@@ -29,20 +35,24 @@ class ActivityList : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val recycler = binding.lisActivity
-        val list= mutableListOf<Activity>()
-        for (activity in resources.getStringArray(R.array.activity_list)){
-            list.add(Activity(activity))
-        }
 
         recycler.layoutManager = LinearLayoutManager(baseContext)
         recycler.itemAnimator = DefaultItemAnimator()
         recycler.setHasFixedSize(true)
 
-        recycler.adapter = AdapterListActivities(list) { activity: Activity ->
-            Toast.makeText(baseContext, "$activity", Toast.LENGTH_LONG).show()
-        }
+        viewModel.getList().observe(this, Observer { list ->
+            recycler.adapter = AdapterListActivities(list) { activity: Activity ->
+                onClickItemList(activity)
+            }
 
+            Log.d("SANTI", "ESTAMOS DENTRPO")
+        })
     }
+
+    private fun onClickItemList(activity: Activity){
+        Toast.makeText(baseContext, activity.activity, Toast.LENGTH_LONG).show()
+    }
+
     //inflate the menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -64,5 +74,10 @@ class ActivityList : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
