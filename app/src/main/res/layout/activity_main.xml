@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@color/blue_00">
+    android:background="@color/blue_00"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/nameLogo"
@@ -25,10 +25,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="@string/participantes"
+        android:text="@string/participants"
+        android:textColor="@color/purple_500"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@color/purple_500"
         app:layout_constraintBottom_toTopOf="@+id/participantsNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.080"
@@ -56,6 +56,7 @@
         android:id="@+id/btnStart"
         android:layout_width="365dp"
         android:layout_height="wrap_content"
+        android:enabled="true"
         android:padding="14dp"
         android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,22 +64,44 @@
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/participantsNumber"
-        app:layout_constraintVertical_bias="0.537"
-        android:enabled="true"/>
+        app:layout_constraintVertical_bias="0.537" />
+
+
+    <CheckBox
+        android:id="@+id/checkboxTermsAndConditions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        app:layout_constraintBottom_toBottomOf="@id/termsAndConditions"
+        app:layout_constraintEnd_toStartOf="@+id/termsAndConditions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStart" />
 
     <TextView
         android:id="@+id/termsAndConditions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="6dp"
-        android:textStyle="bold"
         android:text="@string/termsAndConditions"
-        android:textSize="16sp"
         android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnStart"
         app:layout_constraintVertical_bias="0.001" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:elevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
