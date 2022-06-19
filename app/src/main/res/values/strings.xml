@@ -4,4 +4,16 @@
     <string name="participantsNumber">Número de participantes</string>
     <string name="start">Start</string>
     <string name="termsAndConditions">Termos e condições</string>
+
+    <array name="activity_list">
+        <item>Educatinal</item>
+        <item>Recreational</item>
+        <item>Social</item>
+        <item>Diy</item>
+        <item>Charity</item>
+        <item>Cooking</item>
+        <item>relaxation</item>
+        <item>Music</item>
+        <item>Busywork</item>
+    </array>
 </resources>
