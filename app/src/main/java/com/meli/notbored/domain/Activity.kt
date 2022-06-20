@@ -1,10 +1,35 @@
 package com.meli.notbored.domain
 
-import com.meli.notbored.R
+import android.os.Parcel
+import android.os.Parcelable
 import java.text.DecimalFormat
-import java.util.*
 
-data class Activity(var activity: String, var price: Float)
+data class Activity(var activity: String?, var price: Float):Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString(),
+        parcel.readFloat()
+    ) {
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(activity)
+        parcel.writeFloat(price)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Activity> {
+        override fun createFromParcel(parcel: Parcel): Activity {
+            return Activity(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Activity?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 object ServiceActivities {
     fun getList(arrayList: Array<String>):MutableList<Activity> {

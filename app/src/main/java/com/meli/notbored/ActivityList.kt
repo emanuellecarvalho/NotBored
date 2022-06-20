@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meli.notbored.adapters.AdapterListActivities
@@ -18,6 +19,7 @@ import com.meli.notbored.viewmodel.ModelActivityList
 class ActivityList : AppCompatActivity() {
     private var _binding: ActivityListBinding? = null
     private val binding get() = _binding!!
+    private var participantsNumber: Int? = null
     private val viewModel: ModelActivityList by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,8 @@ class ActivityList : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        participantsNumber = intent.extras?.getInt("participantsNumber")
+
         val recycler = binding.listActivity
 
         recycler.layoutManager = LinearLayoutManager(baseContext)
@@ -49,13 +53,13 @@ class ActivityList : AppCompatActivity() {
         }
     }
 
-    private fun onClickItemList(activity: Activity){
-        viewModel.activitySelected(activity)
-        val intent = Intent(this, ActivitySuggestion::class.java)
-        startActivity(intent)
-        Toast.makeText(baseContext,
-            "activida: ${activity.activity} price: ${activity.price}",
-            Toast.LENGTH_LONG).show()
+    private fun onClickItemList(activity: Activity) {
+        if (participantsNumber != null) {
+            val intent = Intent(this, ActivitySuggestion::class.java)
+            intent.putExtra("participantsNumber", participantsNumber)
+            intent.putExtra("act", activity)
+            startActivity(intent)
+        }
     }
 
     //inflate the menu

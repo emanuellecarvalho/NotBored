@@ -9,13 +9,16 @@ import android.text.TextWatcher
 import android.text.style.UnderlineSpan
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import com.meli.notbored.databinding.ActivityMainBinding
+import com.meli.notbored.viewmodel.ModelActivityList
 import android.widget.CheckBox as CheckBox
 
 class MainActivity : AppCompatActivity(), TextWatcher {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var checkBoxTerms: CheckBox
+    private val viewModel: ModelActivityList by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +27,16 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
         binding.participantsNumber.addTextChangedListener(this)
         binding.btnStart.setOnClickListener {
-            val intent = Intent(this, ActivityList::class.java)
-            startActivity(intent)
-1
-            Toast.makeText(baseContext, "text", Toast.LENGTH_LONG).show()
+            val participantsNumber = binding.participantsNumber.text.toString().toInt()
+            viewModel.participantNumber(participantsNumber)
         }
+
+        viewModel.getParticipantNumber().observe(this) { number ->
+            val intent = Intent(this, ActivityList::class.java)
+            intent.putExtra("participantsNumber", number)
+            startActivity(intent)
+        }
+
         binding.checkboxTermsAndConditions.setOnClickListener() {
             //verifyCheckBox()
         }

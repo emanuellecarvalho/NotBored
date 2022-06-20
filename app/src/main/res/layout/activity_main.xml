@@ -56,7 +56,7 @@
         android:id="@+id/btnStart"
         android:layout_width="365dp"
         android:layout_height="wrap_content"
-        android:enabled="true"
+        android:enabled="false"
         android:padding="14dp"
         android:text="@string/start"
         app:layout_constraintBottom_toBottomOf="parent"
