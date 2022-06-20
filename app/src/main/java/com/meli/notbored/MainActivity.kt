@@ -7,10 +7,8 @@ import android.text.SpannableString
 import android.text.TextWatcher
 import android.text.style.UnderlineSpan
 import android.util.Log
-import android.widget.ImageView
 import android.widget.Toast
 import com.meli.notbored.databinding.ActivityMainBinding
-import com.meli.notbored.databinding.TermConditionBinding
 import android.widget.CheckBox as CheckBox
 
 class MainActivity : AppCompatActivity(), TextWatcher {

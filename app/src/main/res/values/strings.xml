@@ -11,15 +11,16 @@ nullam ligula elementum duis tellus maecenas nec fermentum sed dictum
 laoreet, taciti donec habitant quam purus ultricies porta posuere sociis. Cubilia
 senectus netus integer tempor dignissim viverra nostra tellus scelerisque aliquet,
 semper penatibus tempus sociosqu class sociis bibendum justo etiam, rutrum
-aenean et eget pretium volutpat eu dictum dictumst.\n\n Praesent gravida ridiculus cursus luctus maecenas in libero mi interdum, auctor
+aenean et eget pretium volutpat eu dictum dictumst.\n\n Praesent gravida ridiculus
+cursus luctus maecenas in libero mi interdum, auctor
 ullamcorper eget nam eros condimentum litora tristique erat, fusce rhoncus
 mauris cras aptent non et ultricies. Iaculis porttitor etiam pulvinar proin fringilla
 ad, sem ornare sociosqu ultrices litora himenaeos egestas, eros laoreet mauris
 leo porta. Nibh interdum facilisis dapibus magnis phasellus tortor fusce nostra
 quam, ante non elementum himenaeos id hac et hendrerit eros, dui at sollicitudin
-turpis viverra molestie cras quis.\n\n Dignissim faucibus auctor in vitae porttitor tellus nascetur tempor sociosqu,
-elementum dis ultricies eu tempus tincidunt lectus posuere, et ac interdum
-commodo montes convallis curae facilisis. Vitae diam phasellus litora ad aenean
+turpis viverra molestie cras quis.\n\n Dignissim faucibus auctor in vitae porttitor
+tellus nascetur tempor sociosqu, elementum dis ultricies eu tempus tincidunt lectus posuere,
+et ac interdum commodo montes convallis curae facilisis. Vitae diam phasellus litora ad aenean
 himenaeos, magnis malesuada nec metus faucibus, turpis mollis hac lacinia
 lacus. Condimentum dis in sed vel molestie integer, gravida eget volutpat
 interdum bibendum scelerisque magnis, penatibus non sollicitudin convallis
@@ -33,6 +34,7 @@ vestibulum cum leo semper fusce porta eu fermentum. Proin nisi suspendisse
 class facilisi curabitur quisque, fusce vulputate semper a nulla velit, duis in orci
 faucibus turpis. Risus metus magnis aliquam accumsan laoreet congue per,
     </string>
+    <string name="TryAnother">Try another</string>
 
     <array name="activity_list">
         <item>Educatinal</item>
@@ -41,7 +43,7 @@ faucibus turpis. Risus metus magnis aliquam accumsan laoreet congue per,
         <item>Diy</item>
         <item>Charity</item>
         <item>Cooking</item>
-        <item>relaxation</item>
+        <item>Relaxation</item>
         <item>Music</item>
         <item>Busywork</item>
     </array>

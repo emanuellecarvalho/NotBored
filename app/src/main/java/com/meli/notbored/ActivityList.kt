@@ -33,7 +33,7 @@ class ActivityList : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        val recycler = binding.lisActivity
+        val recycler = binding.listActivity
 
         recycler.layoutManager = LinearLayoutManager(baseContext)
         recycler.itemAnimator = DefaultItemAnimator()
