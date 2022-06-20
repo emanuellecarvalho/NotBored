@@ -9,7 +9,6 @@ import android.text.TextWatcher
 import android.text.style.UnderlineSpan
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.viewModels
 import com.meli.notbored.databinding.ActivityMainBinding
 import com.meli.notbored.domain.EXTRAS
 import com.meli.notbored.viewmodel.ModelActivityList
@@ -28,18 +27,15 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
         binding.participantsNumber.addTextChangedListener(this)
         binding.btnStart.setOnClickListener {
-            val participantsNumber = binding.participantsNumber.text.toString().toInt()
-            viewModel.participantNumber(participantsNumber)
-        }
-
-        viewModel.getParticipantNumber().observe(this) { number ->
-            val intent = Intent(this@MainActivity, ActivityList::class.java)
-            intent.putExtra(EXTRAS.NUMBER_PARTICIPANT.name, number)
+            val intent = Intent(this, ActivityList::class.java)
+            val participants = binding.participantsNumber.text.toString().toInt()
+            intent.putExtra("PARTICIPANT_NUMBER", participants)
             startActivity(intent)
+
         }
 
         binding.checkboxTermsAndConditions.setOnClickListener() {
-            //verifyCheckBox()
+            checkBoxFilled()
         }
 
         binding.termsAndConditions.setOnClickListener() {
@@ -66,15 +62,16 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         //valida dois campos
         if (!p0.isNullOrBlank()) {
             val participantes = binding.participantsNumber.text.toString().toInt()
-            if (participantes > 0) binding.btnStart.isEnabled = true
-            if (participantes == 0) Toast.makeText(
-                baseContext,
-                "Participant number cannot be zero!",
-                Toast.LENGTH_LONG
-            ).show()
-
-        } else {
-            binding.btnStart.isEnabled = false
+            if (participantes == 0) {
+                Toast.makeText(
+                    baseContext,
+                    "Participant number cannot be zero!",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            if (participantes > 0 && checkBoxTerms.isChecked) {
+                binding.btnStart.isEnabled = true
+            }
         }
 
         Log.d("SANTI", "beforeTextChanged")
@@ -87,11 +84,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
     }
 
     private fun checkBoxFilled() {
-        if (checkBoxTerms.isChecked) Toast.makeText(
-            applicationContext,
-            "Accepted",
-            Toast.LENGTH_LONG
-        ).show()
+        if (checkBoxTerms.isChecked) binding.btnStart.isEnabled = true
         else Toast.makeText(
             applicationContext,
             "Please check this box if you want to proceed.",

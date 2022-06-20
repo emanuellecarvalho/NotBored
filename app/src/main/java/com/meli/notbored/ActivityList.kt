@@ -52,19 +52,28 @@ class ActivityList : AppCompatActivity() {
         viewModel.getList().observe(this) { list ->
             activityList = list
             recycler.adapter = AdapterListActivities(list) { activity: Activity ->
-                startActivitySuggestion(activity, participantsNumber)
+                onClickItemList(activity)
             }
+
+            Log.d("SANTI", "ESTAMOS DENTRPO")
         }
     }
 
-    private fun startActivitySuggestion(activity: Activity, participantsNumber:Int?) {
-        if (participantsNumber != null) {
-            val intent = Intent(this@ActivityList, ActivitySuggestion::class.java)
-                intent.putExtra(EXTRAS.NUMBER_PARTICIPANT.name, participantsNumber)
-                intent.putExtra(EXTRAS.ATIVIDADE.name, activity)
+    private fun onClickItemList(activity: Activity){
+        viewModel.activitySelected(activity)
+        val intent = Intent(this, ActivitySuggestion::class.java)
+        val participants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
+        val priceString = priceCategory(activity.price)
+        intent.putExtra("PARTICIPANT_NUMBER", participants)
+        intent.putExtra("CATEGORY_TASK", activity.activity)
+        intent.putExtra("PRICE_NAME", priceString)
+        startActivity(intent)
+        Toast.makeText(
+            baseContext,
+            "activida: ${activity.activity} price: ${activity.price}",
+            Toast.LENGTH_LONG
+        ).show()
 
-            startActivity(intent)
-        }
     }
 
     //inflate the menu
@@ -95,5 +104,22 @@ class ActivityList : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    private fun priceCategory(priceParameter: Float): String {
+
+        if (priceParameter == 0f) {
+            return "Free"
+        }
+        else if (priceParameter > 0 && priceParameter < 0.3f) {
+            return "Low"
+        }
+        else if (priceParameter > 0.3f && priceParameter < 0.6f) {
+            return "Medium"
+        }
+        else if (priceParameter > 0.6f) {
+            return "High"
+        }
+        return "oi"
     }
 }

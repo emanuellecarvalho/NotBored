@@ -1,39 +1,30 @@
 package com.meli.notbored
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import com.meli.notbored.databinding.ActivitySuggestionBinding
-import com.meli.notbored.domain.Activity
-import com.meli.notbored.domain.EXTRAS
 
-class ActivitySuggestion: AppCompatActivity() {
-    private var _binding: ActivitySuggestionBinding? = null
-    private val binding get() = _binding!!
-    private var participantsNumber: Int? = null
-    private var activity: Activity? = null
+
+class ActivitySuggestion : AppCompatActivity() {
+
+    private lateinit var binding: ActivitySuggestionBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        _binding = ActivitySuggestionBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
+        binding = ActivitySuggestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.toolbar
-        toolbar.navigationIcon = AppCompatResources.getDrawable(
-            baseContext,
-            R.drawable.ic_baseline_navigate_before_24
-        )
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        val numberParticipants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
+        val categoryActivity = getIntent().getStringExtra("CATEGORY_TASK")
+        val activityPrice = getIntent().getFloatExtra("PRICE_NAME", 0F)
 
-        //numero de participantes recebidos da outra activity
-        participantsNumber = intent.extras?.getInt(EXTRAS.NUMBER_PARTICIPANT.name)
-        //Toast.makeText(this, "$participantsNumber", Toast.LENGTH_SHORT).show()
+        binding.numberParticipantsActivitySuggestion.text = numberParticipants.toString()
 
-        //aqui ja a atividade pronta para ser populada nas views
-        activity = intent.extras?.getParcelable(EXTRAS.ATIVIDADE.name)
-        Toast.makeText(this, "${activity?.activity}", Toast.LENGTH_SHORT).show()
+        binding.toolbarSuggestions.title = categoryActivity
+
+        binding.priceParticipantsActivitySuggestion.text = activityPrice.toString()
+
     }
+
+
 }

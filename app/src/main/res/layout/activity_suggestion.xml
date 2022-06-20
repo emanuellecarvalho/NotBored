@@ -8,6 +8,7 @@
     tools:context=".ActivitySuggestion">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarSuggestions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +31,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/textTitileActivitySuggestion"
+        android:id="@+id/textTitleActivitySuggestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="144dp"
@@ -73,7 +74,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="344dp"
         android:layout_marginTop="144dp"
-        android:text="2"
         android:textColor="@color/purple_500"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
