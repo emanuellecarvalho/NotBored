@@ -53,7 +53,9 @@ class ActivityList : AppCompatActivity() {
         viewModel.activitySelected(activity)
         val intent = Intent(this, ActivitySuggestion::class.java)
         startActivity(intent)
-        Toast.makeText(baseContext, activity.activity, Toast.LENGTH_LONG).show()
+        Toast.makeText(baseContext,
+            "activida: ${activity.activity} price: ${activity.price}",
+            Toast.LENGTH_LONG).show()
     }
 
     //inflate the menu

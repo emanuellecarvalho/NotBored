@@ -17,7 +17,7 @@ class TermConditionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = TermConditionBinding.inflate(inflater)
+        binding = TermConditionBinding.inflate(inflater)
         binding.iconCloseFragment.setOnClickListener{
             closeFragment()
         }
