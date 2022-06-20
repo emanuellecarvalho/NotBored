@@ -4,23 +4,22 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.text.DecimalFormat
 import kotlin.random.Random
-import java.util.*
 
 enum class EXTRAS(key: String){
     ATIVIDADE(key = "ATIVIDADE"),
     NUMBER_PARTICIPANT(key = "NUMBER_PARTICIPANT")
 }
 
-data class Activity(var activity: String?, var price: Float):Parcelable {
+data class Activity(var activity: String?, var price: String?):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readFloat()
+        parcel.readString()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(activity)
-        parcel.writeFloat(price)
+        parcel.writeString(price)
     }
 
     override fun describeContents(): Int {
@@ -75,9 +74,9 @@ object ServiceActivities {
         return activityList[range]
     }
 
-    fun getRandomPrice():Float{
-        val random = 0.0 + Math.random() * (1.0 - 0.0)
+    fun getRandomPrice(): String {
+        val random = 0.0f + Math.random() * (1.0f - 0.0f)
         val s = DecimalFormat("0.0")
-        return s.format(random).toFloat()
+        return s.format(random)
     }
 }
