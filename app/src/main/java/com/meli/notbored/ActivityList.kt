@@ -15,6 +15,7 @@ import com.meli.notbored.adapters.AdapterListActivities
 import com.meli.notbored.databinding.ActivityListBinding
 import com.meli.notbored.domain.Activity
 import com.meli.notbored.domain.EXTRAS
+import com.meli.notbored.domain.ServiceActivities
 import com.meli.notbored.viewmodel.ModelActivityList
 
 class ActivityList : AppCompatActivity() {
@@ -22,6 +23,7 @@ class ActivityList : AppCompatActivity() {
     private val binding get() = _binding!!
     private var participantsNumber: Int? = null
     private val viewModel: ModelActivityList by viewModels()
+    private var activityList: MutableList<Activity>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,13 +52,14 @@ class ActivityList : AppCompatActivity() {
         recycler.setHasFixedSize(true)
 
         viewModel.getList().observe(this) { list ->
+            activityList = list
             recycler.adapter = AdapterListActivities(list) { activity: Activity ->
-                onClickItemList(activity)
+                startActivitySuggestion(activity, participantsNumber)
             }
         }
     }
 
-    private fun onClickItemList(activity: Activity) {
+    private fun startActivitySuggestion(activity: Activity, participantsNumber:Int?) {
         if (participantsNumber != null) {
             val intent = Intent(this@ActivityList, ActivitySuggestion::class.java)
                 intent.putExtra(EXTRAS.NUMBER_PARTICIPANT.name, participantsNumber)
@@ -78,7 +81,9 @@ class ActivityList : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.random -> {
-                Toast.makeText(baseContext, "OUTRA ACTIVITY AQUI", Toast.LENGTH_LONG).show()
+                val activity = activityList?.let { ServiceActivities.getRandomActivity(it) }
+                activity?.let { startActivitySuggestion(it, participantsNumber) }
+                Toast.makeText(baseContext, "${activity?.activity}", Toast.LENGTH_SHORT).show()
                 true
             }
             android.R.id.home -> {

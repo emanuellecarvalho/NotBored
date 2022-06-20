@@ -3,6 +3,8 @@ package com.meli.notbored.domain
 import android.os.Parcel
 import android.os.Parcelable
 import java.text.DecimalFormat
+import kotlin.random.Random
+import java.util.*
 
 enum class EXTRAS(key: String){
     ATIVIDADE(key = "ATIVIDADE"),
@@ -66,6 +68,11 @@ object ServiceActivities {
         }
 
         return list
+    }
+
+    fun getRandomActivity(activityList: MutableList<Activity>):Activity{
+        val range = Random.nextInt(activityList.size - 0) + 0
+        return activityList[range]
     }
 
     fun getRandomPrice():Float{
