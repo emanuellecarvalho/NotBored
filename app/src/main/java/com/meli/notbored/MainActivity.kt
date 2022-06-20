@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.meli.notbored.databinding.ActivityMainBinding
+import com.meli.notbored.domain.EXTRAS
 import com.meli.notbored.viewmodel.ModelActivityList
 import android.widget.CheckBox as CheckBox
 
@@ -32,8 +33,8 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         }
 
         viewModel.getParticipantNumber().observe(this) { number ->
-            val intent = Intent(this, ActivityList::class.java)
-            intent.putExtra("participantsNumber", number)
+            val intent = Intent(this@MainActivity, ActivityList::class.java)
+            intent.putExtra(EXTRAS.NUMBER_PARTICIPANT.name, number)
             startActivity(intent)
         }
 

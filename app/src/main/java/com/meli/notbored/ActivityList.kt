@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.meli.notbored.adapters.AdapterListActivities
 import com.meli.notbored.databinding.ActivityListBinding
 import com.meli.notbored.domain.Activity
+import com.meli.notbored.domain.EXTRAS
 import com.meli.notbored.viewmodel.ModelActivityList
 
 class ActivityList : AppCompatActivity() {
@@ -36,7 +37,11 @@ class ActivityList : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
-        participantsNumber = intent.extras?.getInt("participantsNumber")
+        participantsNumber = intent.extras?.run {
+            getInt(EXTRAS.NUMBER_PARTICIPANT.name)
+        }
+
+        Toast.makeText(this, "$participantsNumber", Toast.LENGTH_SHORT).show()
 
         val recycler = binding.listActivity
 
@@ -48,16 +53,15 @@ class ActivityList : AppCompatActivity() {
             recycler.adapter = AdapterListActivities(list) { activity: Activity ->
                 onClickItemList(activity)
             }
-
-            Log.d("SANTI", "ESTAMOS DENTRPO")
         }
     }
 
     private fun onClickItemList(activity: Activity) {
         if (participantsNumber != null) {
-            val intent = Intent(this, ActivitySuggestion::class.java)
-            intent.putExtra("participantsNumber", participantsNumber)
-            intent.putExtra("act", activity)
+            val intent = Intent(this@ActivityList, ActivitySuggestion::class.java)
+                intent.putExtra(EXTRAS.NUMBER_PARTICIPANT.name, participantsNumber)
+                intent.putExtra(EXTRAS.ATIVIDADE.name, activity)
+
             startActivity(intent)
         }
     }

@@ -4,6 +4,11 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.text.DecimalFormat
 
+enum class EXTRAS(key: String){
+    ATIVIDADE(key = "ATIVIDADE"),
+    NUMBER_PARTICIPANT(key = "NUMBER_PARTICIPANT")
+}
+
 data class Activity(var activity: String?, var price: Float):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
