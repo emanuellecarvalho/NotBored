@@ -7,7 +7,6 @@ import android.view.*
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.meli.notbored.adapters.AdapterListActivities
@@ -40,13 +39,13 @@ class ActivityList : AppCompatActivity() {
         recycler.itemAnimator = DefaultItemAnimator()
         recycler.setHasFixedSize(true)
 
-        viewModel.getList().observe(this, Observer { list ->
+        viewModel.getList().observe(this) { list ->
             recycler.adapter = AdapterListActivities(list) { activity: Activity ->
                 onClickItemList(activity)
             }
 
             Log.d("SANTI", "ESTAMOS DENTRPO")
-        })
+        }
     }
 
     private fun onClickItemList(activity: Activity){
