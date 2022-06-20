@@ -1,24 +1,21 @@
 package com.meli.notbored
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableString
 import android.text.TextWatcher
 import android.text.style.UnderlineSpan
 import android.util.Log
+import android.widget.CheckBox
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.meli.notbored.databinding.ActivityMainBinding
-import com.meli.notbored.domain.EXTRAS
-import com.meli.notbored.viewmodel.ModelActivityList
-import android.widget.CheckBox as CheckBox
 
 class MainActivity : AppCompatActivity(), TextWatcher {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var checkBoxTerms: CheckBox
-    private val viewModel: ModelActivityList by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,11 +1,13 @@
 package com.meli.notbored
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,15 +57,14 @@ class ActivityList : AppCompatActivity() {
                 onClickItemList(activity)
             }
 
-            Log.d("SANTI", "ESTAMOS DENTRPO")
         }
     }
 
-    private fun onClickItemList(activity: Activity){
+    private fun onClickItemList(activity: Activity) {
         viewModel.activitySelected(activity)
         val intent = Intent(this, ActivitySuggestion::class.java)
         val participants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
-        val priceString = priceCategory(activity.price)
+        val priceString = activity.price?.let { priceCategory(it) }
         intent.putExtra("PARTICIPANT_NUMBER", participants)
         intent.putExtra("CATEGORY_TASK", activity.activity)
         intent.putExtra("PRICE_NAME", priceString)
@@ -89,7 +90,6 @@ class ActivityList : AppCompatActivity() {
         return when (item.itemId) {
             R.id.random -> {
                 val activity = activityList?.let { ServiceActivities.getRandomActivity(it) }
-                activity?.let { startActivitySuggestion(it, participantsNumber) }
                 Toast.makeText(baseContext, "${activity?.activity}", Toast.LENGTH_SHORT).show()
                 true
             }
@@ -106,20 +106,20 @@ class ActivityList : AppCompatActivity() {
         _binding = null
     }
 
-    private fun priceCategory(priceParameter: Float): String {
-
-        if (priceParameter == 0f) {
-            return "Free"
-        }
-        else if (priceParameter > 0 && priceParameter < 0.3f) {
-            return "Low"
-        }
-        else if (priceParameter > 0.3f && priceParameter < 0.6f) {
-            return "Medium"
-        }
-        else if (priceParameter > 0.6f) {
-            return "High"
-        }
+    private fun priceCategory(priceParameter: String): String {
+        //converter o preço de string pra float... não sei pq virou string .---.
+//        if (priceParameter == 0f) {
+//            return "Free"
+//        }
+//        else if (priceParameter > 0 && priceParameter < 0.3f) {
+//            return "Low"
+//        }
+//        else if (priceParameter > 0.3f && priceParameter < 0.6f) {
+//            return "Medium"
+//        }
+//        else if (priceParameter > 0.6f) {
+//            return "High"
+//        }
         return "oi"
     }
 }

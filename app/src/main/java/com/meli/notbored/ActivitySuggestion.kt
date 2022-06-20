@@ -20,7 +20,7 @@ class ActivitySuggestion : AppCompatActivity() {
 
         binding.numberParticipantsActivitySuggestion.text = numberParticipants.toString()
 
-        binding.toolbarSuggestions.title = categoryActivity
+        binding.toolbar.title = categoryActivity
 
         binding.priceParticipantsActivitySuggestion.text = activityPrice.toString()
 
