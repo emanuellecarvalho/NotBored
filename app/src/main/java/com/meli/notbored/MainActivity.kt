@@ -1,5 +1,6 @@
 package com.meli.notbored
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
         binding.participantsNumber.addTextChangedListener(this)
         binding.btnStart.setOnClickListener {
+            val intent = Intent(this, ActivityList::class.java)
+            startActivity(intent)
+1
             Toast.makeText(baseContext, "text", Toast.LENGTH_LONG).show()
         }
         binding.checkboxTermsAndConditions.setOnClickListener() {
@@ -94,6 +98,4 @@ class MainActivity : AppCompatActivity(), TextWatcher {
             .replace(R.id.fragmentContainer, TermConditionFragment())
             .commit()
     }
-
-
 }

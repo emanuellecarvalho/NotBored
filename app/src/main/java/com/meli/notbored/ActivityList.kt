@@ -1,5 +1,6 @@
 package com.meli.notbored
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -49,6 +50,9 @@ class ActivityList : AppCompatActivity() {
     }
 
     private fun onClickItemList(activity: Activity){
+        viewModel.activitySelected(activity)
+        val intent = Intent(this, ActivitySuggestion::class.java)
+        startActivity(intent)
         Toast.makeText(baseContext, activity.activity, Toast.LENGTH_LONG).show()
     }
 

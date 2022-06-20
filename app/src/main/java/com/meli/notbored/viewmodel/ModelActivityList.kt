@@ -7,6 +7,11 @@ import com.meli.notbored.domain.Activity
 import com.meli.notbored.domain.ServiceActivities
 
 class ModelActivityList: ViewModel(){
+    private val activitySelected = MutableLiveData<Activity>()
+
+    fun activitySelected(activity: Activity){
+        activitySelected.value = activity
+    }
 
     private val  listOfActivityList: MutableLiveData<MutableList<Activity>> by lazy {
         MutableLiveData<MutableList<Activity>>().also {
