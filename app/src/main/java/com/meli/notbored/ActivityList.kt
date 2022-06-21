@@ -64,7 +64,7 @@ class ActivityList : AppCompatActivity() {
         viewModel.activitySelected(activity)
         val intent = Intent(this, ActivitySuggestion::class.java)
         val participants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
-        val priceString = activity.price?.let { priceCategory(it) }
+        val priceString = activity.price.let { priceCategory(it) }
         intent.putExtra("PARTICIPANT_NUMBER", participants)
         intent.putExtra("CATEGORY_TASK", activity.activity)
         intent.putExtra("PRICE_NAME", priceString)

@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
                     Toast.LENGTH_LONG
                 ).show()
             }
-            if (participantes > 0 && checkBoxTerms.isChecked) {
+            else if (participantes > 0 && checkBoxTerms.isChecked) {
                 binding.btnStart.isEnabled = true
             }
         }

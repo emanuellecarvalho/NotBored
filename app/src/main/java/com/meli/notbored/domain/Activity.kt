@@ -2,11 +2,10 @@ package com.meli.notbored.domain
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.text.DecimalFormat
 import kotlin.random.Random
 
 enum class EXTRAS(key: String){
-    ATIVIDADE(key = "ATIVIDADE"),
+    //ATIVIDADE(key = "ATIVIDADE"),
     NUMBER_PARTICIPANT(key = "NUMBER_PARTICIPANT")
 }
 
@@ -75,7 +74,6 @@ object ServiceActivities {
 
     private fun getRandomPrice(): Float {
         val random:Double = 0.0f + Math.random() * (1.0f - 0.0f)
-        //val formatDecimal:DecimalFormat = DecimalFormat("0.0")
         return random.toFloat()
     }
 
