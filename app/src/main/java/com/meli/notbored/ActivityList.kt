@@ -54,13 +54,13 @@ class ActivityList : AppCompatActivity() {
         viewModel.getList().observe(this) { list ->
             activityList = list
             recycler.adapter = AdapterListActivities(list) { activity: Activity ->
-                onClickItemList(activity)
+                onClickItemList(activity, false)
             }
 
         }
     }
 
-    private fun onClickItemList(activity: Activity) {
+    private fun onClickItemList(activity: Activity, isRandom: Boolean) {
         viewModel.activitySelected(activity)
         val intent = Intent(this, ActivitySuggestion::class.java)
         val participants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
@@ -68,6 +68,7 @@ class ActivityList : AppCompatActivity() {
         intent.putExtra("PARTICIPANT_NUMBER", participants)
         intent.putExtra("CATEGORY_TASK", activity.activity)
         intent.putExtra("PRICE_NAME", priceString)
+        intent.putExtra("IS_RANDOM", isRandom)
         startActivity(intent)
         Toast.makeText(
             baseContext,
@@ -91,7 +92,7 @@ class ActivityList : AppCompatActivity() {
             R.id.random -> {
                 val activityRandom = activityList?.let { ServiceActivities.getRandomActivity(it) }
                 if (activityRandom != null) {
-                    onClickItemList(activityRandom)
+                    onClickItemList(activityRandom, true)
                 }
                 Toast.makeText(baseContext, "${activityRandom?.activity}", Toast.LENGTH_SHORT).show()
                 true
