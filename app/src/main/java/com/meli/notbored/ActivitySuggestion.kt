@@ -16,13 +16,14 @@ class ActivitySuggestion : AppCompatActivity() {
 
         val numberParticipants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
         val categoryActivity = getIntent().getStringExtra("CATEGORY_TASK")
-        val activityPrice = getIntent().getFloatExtra("PRICE_NAME", 0F)
+        val activityPrice = getIntent().getStringExtra("PRICE_NAME")
 
         binding.numberParticipantsActivitySuggestion.text = numberParticipants.toString()
 
         binding.toolbar.title = categoryActivity
 
-        binding.priceParticipantsActivitySuggestion.text = activityPrice.toString()
+        binding.priceParticipantsActivitySuggestion.text = activityPrice
+
 
     }
 

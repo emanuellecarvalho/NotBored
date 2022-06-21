@@ -56,5 +56,10 @@ faucibus turpis. Risus metus magnis aliquam accumsan laoreet congue per,
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="priceMedium">Medium</string>
+    <string name="priceRelaxation">Relaxation</string>
+    <string name="priceActivity">Price</string>
+    <string name="participantNumber">Participants</string>
+    <string name="activityTitle">Título da atividade</string>
 
 </resources>

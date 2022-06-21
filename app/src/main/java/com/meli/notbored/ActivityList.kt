@@ -106,20 +106,11 @@ class ActivityList : AppCompatActivity() {
         _binding = null
     }
 
-    private fun priceCategory(priceParameter: String): String {
-        //converter o preço de string pra float... não sei pq virou string .---.
-//        if (priceParameter == 0f) {
-//            return "Free"
-//        }
-//        else if (priceParameter > 0 && priceParameter < 0.3f) {
-//            return "Low"
-//        }
-//        else if (priceParameter > 0.3f && priceParameter < 0.6f) {
-//            return "Medium"
-//        }
-//        else if (priceParameter > 0.6f) {
-//            return "High"
-//        }
-        return "oi"
+    private fun priceCategory(priceParameter: Float): String {
+        if (priceParameter == 0f) return "Free"
+        else if (priceParameter > 0 && priceParameter < 0.3f) return "Low"
+        else if (priceParameter > 0.3f && priceParameter < 0.6f) return "Medium"
+        else if (priceParameter > 0.6f) return "High"
+        return "Price not found"
     }
 }

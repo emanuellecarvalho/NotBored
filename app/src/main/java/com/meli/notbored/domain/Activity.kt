@@ -10,16 +10,15 @@ enum class EXTRAS(key: String){
     NUMBER_PARTICIPANT(key = "NUMBER_PARTICIPANT")
 }
 
-data class Activity(var activity: String?, var price: String?):Parcelable {
+data class Activity(var activity: String?, var price: Float):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readString()
-    ) {
-    }
+        parcel.readFloat()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(activity)
-        parcel.writeString(price)
+        parcel.writeFloat(price)
     }
 
     override fun describeContents(): Int {
@@ -51,7 +50,7 @@ object ServiceActivities {
         val list = mutableListOf<Activity>()
 
         val arrayList = arrayListOf(
-            "Educatinal",
+            "Educational",
             "Recreational",
             "Social",
             "Diy",
@@ -74,9 +73,10 @@ object ServiceActivities {
         return activityList[range]
     }
 
-    fun getRandomPrice(): String {
-        val random = 0.0f + Math.random() * (1.0f - 0.0f)
-        val s = DecimalFormat("0.0")
-        return s.format(random)
+    private fun getRandomPrice(): Float {
+        val random:Double = 0.0f + Math.random() * (1.0f - 0.0f)
+        //val formatDecimal:DecimalFormat = DecimalFormat("0.0")
+        return random.toFloat()
     }
+
 }
