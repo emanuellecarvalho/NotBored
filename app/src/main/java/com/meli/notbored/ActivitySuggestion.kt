@@ -3,6 +3,7 @@ package com.meli.notbored
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.meli.notbored.databinding.ActivitySuggestionBinding
 
@@ -15,6 +16,12 @@ class ActivitySuggestion : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySuggestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //back to ActivityList
+        binding.toolbar.setOnClickListener {
+            val intent = Intent(this, ActivityList::class.java)
+            startActivity(intent)
+        }
 
         val numberParticipants = intent.getIntExtra("PARTICIPANT_NUMBER", 0)
         val categoryActivity = intent.getStringExtra("CATEGORY_TASK")
@@ -32,6 +39,8 @@ class ActivitySuggestion : AppCompatActivity() {
             binding.randomCategoryActivitySuggestion.isVisible = true
             binding.randomCategoryActivitySuggestion.text = categoryActivity
         }
+
+
 
     }
 
