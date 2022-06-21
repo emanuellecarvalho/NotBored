@@ -5,19 +5,22 @@ import android.os.Parcelable
 import kotlin.random.Random
 
 enum class EXTRAS(key: String){
-    //ATIVIDADE(key = "ATIVIDADE"),
+    ATIVIDADE(key = "ATIVIDADE"),
     NUMBER_PARTICIPANT(key = "NUMBER_PARTICIPANT")
 }
 
-data class Activity(var activity: String?, var price: Float):Parcelable {
+data class Activity(var activity: String?, var description: String?, var price: Float, var isRandomic: Boolean = false):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
-        parcel.readFloat()
+        parcel.readString(),
+        parcel.readFloat(),
+        parcel.readByte() != 0.toByte()
     )
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(activity)
+        parcel.writeString(description)
         parcel.writeFloat(price)
+        parcel.writeByte(if (isRandomic) 1 else 0)
     }
 
     override fun describeContents(): Int {
@@ -33,17 +36,10 @@ data class Activity(var activity: String?, var price: Float):Parcelable {
             return arrayOfNulls(size)
         }
     }
+
 }
 
 object ServiceActivities {
-    fun getList(arrayList: Array<String>):MutableList<Activity> {
-        val list = mutableListOf<Activity>()
-
-        for (activity in arrayList) {
-            list.add(Activity(activity, getRandomPrice()))
-        }
-        return list
-    }
 
     fun getList(): MutableList<Activity>{
         val list = mutableListOf<Activity>()
@@ -60,16 +56,30 @@ object ServiceActivities {
             "Busywork"
         )
 
-        for (activity in arrayList){
-            list.add(Activity(activity, getRandomPrice()))
+        val arrayListDesc = arrayListOf(
+            "Educational is good",
+            "Recreational lets go there",
+            "Social, no i dont",
+            "Diy! OH no, im busy",
+            "Charity. Im poor",
+            "Cooking. You cook to me",
+            "Relaxation. I need.",
+            "Music. every single day",
+            "Busywork. My job already does that."
+        )
+
+        for ((count, activity) in arrayList.withIndex()){
+            list.add(Activity(activity, arrayListDesc[count], getRandomPrice()))
         }
 
         return list
     }
 
-    fun getRandomActivity(activityList: MutableList<Activity>):Activity{
+    fun getRandomActivity(activityList: MutableList<Activity>): Activity {
         val range = Random.nextInt(activityList.size - 0) + 0
-        return activityList[range]
+        val activity = activityList[range]
+        activity.isRandomic = true
+        return activity
     }
 
     private fun getRandomPrice(): Float {
@@ -77,4 +87,11 @@ object ServiceActivities {
         return random.toFloat()
     }
 
+    fun priceCategory(priceParameter: Float): String {
+        if (priceParameter == 0f) return "Free"
+        else if (priceParameter > 0 && priceParameter < 0.3f) return "Low"
+        else if (priceParameter > 0.3f && priceParameter < 0.6f) return "Medium"
+        else if (priceParameter > 0.6f) return "High"
+        return "Price not found"
+    }
 }

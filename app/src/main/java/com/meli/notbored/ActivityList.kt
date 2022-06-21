@@ -64,11 +64,12 @@ class ActivityList : AppCompatActivity() {
         viewModel.activitySelected(activity)
         val intent = Intent(this, ActivitySuggestion::class.java)
         val participants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
-        val priceString = activity.price.let { priceCategory(it) }
+        //val priceString = activity.price.let { priceCategory(it) }
         intent.putExtra("PARTICIPANT_NUMBER", participants)
-        intent.putExtra("CATEGORY_TASK", activity.activity)
-        intent.putExtra("PRICE_NAME", priceString)
-        intent.putExtra("IS_RANDOM", isRandom)
+        intent.putExtra(EXTRAS.ATIVIDADE.name, activity)
+//        intent.putExtra("CATEGORY_TASK", activity.activity)
+//        intent.putExtra("PRICE_NAME", priceString)
+//        intent.putExtra("IS_RANDOM", isRandom)
         startActivity(intent)
         Toast.makeText(
             baseContext,
@@ -90,7 +91,9 @@ class ActivityList : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.random -> {
-                val activityRandom = activityList?.let { ServiceActivities.getRandomActivity(it) }
+                val activityRandom: Activity? = activityList?.let {
+                    ServiceActivities.getRandomActivity(it)}
+                activityRandom?.isRandomic = true
                 if (activityRandom != null) {
                     onClickItemList(activityRandom, true)
                 }
@@ -108,13 +111,5 @@ class ActivityList : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-    }
-
-    private fun priceCategory(priceParameter: Float): String {
-        if (priceParameter == 0f) return "Free"
-        else if (priceParameter > 0 && priceParameter < 0.3f) return "Low"
-        else if (priceParameter > 0.3f && priceParameter < 0.6f) return "Medium"
-        else if (priceParameter > 0.6f) return "High"
-        return "Price not found"
     }
 }

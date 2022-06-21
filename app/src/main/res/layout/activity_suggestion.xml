@@ -98,7 +98,7 @@
 
     <TextView
         android:id="@+id/priceParticipantsActivitySuggestion"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="288dp"
         android:layout_marginTop="144dp"
@@ -106,7 +106,7 @@
         android:textColor="@color/purple_500"
         android:textSize="18sp"
         android:gravity="end"
-        android:textAlignment="gravity"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -138,7 +138,6 @@
         android:padding="12dp"
         android:layout_marginTop="488dp"
         android:text="@string/TryAnother"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
