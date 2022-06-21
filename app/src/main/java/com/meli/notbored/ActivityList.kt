@@ -89,8 +89,11 @@ class ActivityList : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.random -> {
-                val activity = activityList?.let { ServiceActivities.getRandomActivity(it) }
-                Toast.makeText(baseContext, "${activity?.activity}", Toast.LENGTH_SHORT).show()
+                val activityRandom = activityList?.let { ServiceActivities.getRandomActivity(it) }
+                if (activityRandom != null) {
+                    onClickItemList(activityRandom)
+                }
+                Toast.makeText(baseContext, "${activityRandom?.activity}", Toast.LENGTH_SHORT).show()
                 true
             }
             android.R.id.home -> {
