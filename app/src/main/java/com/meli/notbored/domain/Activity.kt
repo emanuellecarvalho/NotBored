@@ -62,7 +62,7 @@ object ServiceActivities {
             "Social, no i dont",
             "Diy! OH no, im busy",
             "Charity. Im poor",
-            "Cooking. You cook to me",
+            "Cooking. You cook for me",
             "Relaxation. I need.",
             "Music. every single day",
             "Busywork. My job already does that."

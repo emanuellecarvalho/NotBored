@@ -1,5 +1,6 @@
 package com.meli.notbored.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,12 +10,15 @@ import com.meli.notbored.domain.ServiceActivities
 class ModelActivityList: ViewModel(){
 
     private val activitySelected = MutableLiveData<Activity>()
-    fun activitySelected(activity: Activity){
+
+    fun setActivitySelected(activity: Activity){
+        Log.d("SANTI", "setActivitySelected ${activity}")
         activitySelected.value = activity
     }
 
-    fun getSelectedActivity(): LiveData<Activity>{
-        return this.activitySelected
+    fun selectedActivity(): LiveData<Activity>{
+        Log.d("SANTI", "selectedActivity ${activitySelected.value?.activity}")
+        return activitySelected
     }
 
     private val participantNumber = MutableLiveData<Int>()
@@ -33,7 +37,7 @@ class ModelActivityList: ViewModel(){
     }
 
     fun getList(): LiveData<MutableList<Activity>> {
-        return this.listOfActivityList
+        return listOfActivityList
     }
 
     private fun loadUserList(): MutableList<Activity>{

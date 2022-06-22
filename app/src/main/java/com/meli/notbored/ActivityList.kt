@@ -61,22 +61,12 @@ class ActivityList : AppCompatActivity() {
     }
 
     private fun onClickItemList(activity: Activity, isRandom: Boolean) {
-        viewModel.activitySelected(activity)
+        viewModel.setActivitySelected(activity)
         val intent = Intent(this, ActivitySuggestion::class.java)
         val participants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
-        //val priceString = activity.price.let { priceCategory(it) }
         intent.putExtra("PARTICIPANT_NUMBER", participants)
         intent.putExtra(EXTRAS.ATIVIDADE.name, activity)
-//        intent.putExtra("CATEGORY_TASK", activity.activity)
-//        intent.putExtra("PRICE_NAME", priceString)
-//        intent.putExtra("IS_RANDOM", isRandom)
         startActivity(intent)
-        Toast.makeText(
-            baseContext,
-            "activida: ${activity.activity} price: ${activity.price}",
-            Toast.LENGTH_LONG
-        ).show()
-
     }
 
     //inflate the menu
