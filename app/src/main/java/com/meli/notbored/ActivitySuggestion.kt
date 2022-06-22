@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
+import com.google.android.material.appbar.MaterialToolbar
 import com.meli.notbored.databinding.ActivitySuggestionBinding
 import com.meli.notbored.domain.Activity
 import com.meli.notbored.domain.EXTRAS
 import com.meli.notbored.domain.ServiceActivities
+import com.meli.notbored.util.view.UtilitiesView
 import com.meli.notbored.viewmodel.ModelActivityList
 
 
 class ActivitySuggestion : AppCompatActivity() {
 
     private lateinit var binding: ActivitySuggestionBinding
+    private var toolbar: MaterialToolbar? = null
     private val viewModel: ModelActivityList by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +25,9 @@ class ActivitySuggestion : AppCompatActivity() {
         binding = ActivitySuggestionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.toolbar.navigationIcon = AppCompatResources.getDrawable(
-            baseContext,
-            R.drawable.ic_baseline_navigate_before_24
-        )
-        setSupportActionBar(binding.toolbar)
+        toolbar = binding.toolbar
+        UtilitiesView.showToolBar(toolbar!!, baseContext)
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
 
@@ -53,7 +53,7 @@ class ActivitySuggestion : AppCompatActivity() {
 
     private fun updateView(activity: Activity){
         binding.textTitleActivitySuggestion.text = activity.description
-        binding.toolbar.title = activity.activity
+        toolbar?.title = activity.activity
         binding.priceParticipantsActivitySuggestion.text =
             activity.price.let { ServiceActivities.priceCategory(it) }
 
@@ -73,6 +73,10 @@ class ActivitySuggestion : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
 

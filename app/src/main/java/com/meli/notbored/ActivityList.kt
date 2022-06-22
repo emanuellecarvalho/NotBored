@@ -8,14 +8,15 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.appbar.MaterialToolbar
 import com.meli.notbored.adapters.AdapterListActivities
 import com.meli.notbored.databinding.ActivityListBinding
 import com.meli.notbored.domain.Activity
 import com.meli.notbored.domain.EXTRAS
 import com.meli.notbored.domain.ServiceActivities
+import com.meli.notbored.util.view.UtilitiesView
 import com.meli.notbored.viewmodel.ModelActivityList
 
 class ActivityList : AppCompatActivity() {
@@ -24,17 +25,14 @@ class ActivityList : AppCompatActivity() {
     private var participantsNumber: Int? = null
     private val viewModel: ModelActivityList by viewModels()
     private var activityList: MutableList<Activity>? = null
+    private var toolbar: MaterialToolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar = binding.toolbar
-        toolbar.navigationIcon = AppCompatResources.getDrawable(
-            baseContext,
-            R.drawable.ic_baseline_navigate_before_24
-        )
+        toolbar = UtilitiesView.showToolBar(toolbar!!, baseContext)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
@@ -54,13 +52,13 @@ class ActivityList : AppCompatActivity() {
         viewModel.getList().observe(this) { list ->
             activityList = list
             recycler.adapter = AdapterListActivities(list) { activity: Activity ->
-                onClickItemList(activity, false)
+                onClickItemList(activity)
             }
 
         }
     }
 
-    private fun onClickItemList(activity: Activity, isRandom: Boolean) {
+    private fun onClickItemList(activity: Activity) {
         viewModel.setActivitySelected(activity)
         val intent = Intent(this, ActivitySuggestion::class.java)
         val participants = getIntent().getIntExtra("PARTICIPANT_NUMBER", 0)
@@ -85,7 +83,7 @@ class ActivityList : AppCompatActivity() {
                     ServiceActivities.getRandomActivity(it)}
                 activityRandom?.isRandomic = true
                 if (activityRandom != null) {
-                    onClickItemList(activityRandom, true)
+                    onClickItemList(activityRandom)
                 }
                 Toast.makeText(baseContext, "${activityRandom?.activity}", Toast.LENGTH_SHORT).show()
                 true

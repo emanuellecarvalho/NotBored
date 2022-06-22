@@ -58,13 +58,13 @@ object ServiceActivities {
 
         val arrayListDesc = arrayListOf(
             "Educational is good",
-            "Recreational lets go there",
-            "Social, no i dont",
-            "Diy! OH no, im busy",
-            "Charity. Im poor",
+            "Recreational, let's go there",
+            "Social ... i don't know",
+            "Diy! Oh no, i'm busy",
+            "Charity. I'm poor",
             "Cooking. You cook for me",
-            "Relaxation. I need.",
-            "Music. every single day",
+            "Relaxation. I need it.",
+            "Music. Every single day",
             "Busywork. My job already does that."
         )
 

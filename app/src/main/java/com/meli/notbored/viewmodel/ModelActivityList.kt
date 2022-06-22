@@ -12,12 +12,10 @@ class ModelActivityList: ViewModel(){
     private val activitySelected = MutableLiveData<Activity>()
 
     fun setActivitySelected(activity: Activity){
-        Log.d("SANTI", "setActivitySelected ${activity}")
         activitySelected.value = activity
     }
 
     fun selectedActivity(): LiveData<Activity>{
-        Log.d("SANTI", "selectedActivity ${activitySelected.value?.activity}")
         return activitySelected
     }
 
