@@ -32,7 +32,8 @@ class ActivityList : AppCompatActivity() {
         _binding = ActivityListBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        toolbar = UtilitiesView.showToolBar(toolbar!!, baseContext)
+        toolbar = binding.toolbar
+        UtilitiesView.showToolBar(toolbar!!, baseContext)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setDisplayShowHomeEnabled(true)
