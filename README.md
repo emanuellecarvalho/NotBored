@@ -5,8 +5,8 @@ Application that shows recommendations for activities to be performed, according
 
 ## Features
 
-- Home screen where the user enters the number of participants, a link with Terms and Conditions and a Start button
-- List of 9 possible activity categories that the user can choose as "educational", etc and with a random button included to choose a category at random
+- Home screen where the user enters the number of participants, a link with Terms and Conditions and a Start button;
+- List of 9 possible activity categories that the user can choose as "educational", "diy" etc and a random button included to choose a category at random;
 - When selecting a category, the next one will be the Activity Suggestion where it indicates the title, number of participants and price of the activity. 
 If the user wants another activity, he can click on the Try Another button.
 
