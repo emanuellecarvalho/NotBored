@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
 
         checkBoxTerms = findViewById(R.id.checkboxTermsAndConditions)
 
-        checkBoxTerms.setOnClickListener() {
+        checkBoxTerms.setOnClickListener {
             checkBoxFilled()
         }
     }
@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         if (!p0.isNullOrBlank()) {
             val participantes = binding.participantsNumber.text.toString().toInt()
             if (participantes == 0) {
+                binding.btnStart.isEnabled = false
                 Toast.makeText(
                     baseContext,
                     "Participant number cannot be zero!",
@@ -87,6 +88,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
             "Please check this box if you want to proceed.",
             Toast.LENGTH_LONG
         ).show()
+        binding.btnStart.isEnabled = false
 
     }
 
