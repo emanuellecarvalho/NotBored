@@ -4,18 +4,24 @@ import android.os.Parcel
 import android.os.Parcelable
 import kotlin.random.Random
 
-enum class EXTRAS(key: String){
+enum class EXTRAS(key: String) {
     ATIVIDADE(key = "ATIVIDADE"),
     NUMBER_PARTICIPANT(key = "NUMBER_PARTICIPANT")
 }
 
-data class Activity(var activity: String?, var description: String?, var price: Float, var isRandomic: Boolean = false):Parcelable {
+data class Activity(
+    var activity: String?,
+    var description: String?,
+    var price: Float,
+    var isRandomic: Boolean = false
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.readFloat(),
         parcel.readByte() != 0.toByte()
     )
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(activity)
         parcel.writeString(description)
@@ -41,7 +47,7 @@ data class Activity(var activity: String?, var description: String?, var price: 
 
 object ServiceActivities {
 
-    fun getList(): MutableList<Activity>{
+    fun getList(): MutableList<Activity> {
         val list = mutableListOf<Activity>()
 
         val arrayList = arrayListOf(
@@ -68,7 +74,7 @@ object ServiceActivities {
             "Busywork. My job already does that."
         )
 
-        for ((count, activity) in arrayList.withIndex()){
+        for ((count, activity) in arrayList.withIndex()) {
             list.add(Activity(activity, arrayListDesc[count], getRandomPrice()))
         }
 
@@ -83,7 +89,7 @@ object ServiceActivities {
     }
 
     private fun getRandomPrice(): Float {
-        val random:Double = 0.0f + Math.random() * (1.0f - 0.0f)
+        val random: Double = 0.0f + Math.random() * (1.0f - 0.0f)
         return random.toFloat()
     }
 
