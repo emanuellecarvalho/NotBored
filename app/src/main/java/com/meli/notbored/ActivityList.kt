@@ -2,6 +2,7 @@ package com.meli.notbored
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -50,10 +51,17 @@ class ActivityList : AppCompatActivity() {
         recycler.itemAnimator = DefaultItemAnimator()
         recycler.setHasFixedSize(true)
 
+        viewModel.loadUserList()
+
         viewModel.getList().observe(this) { list ->
             activityList = list
-            recycler.adapter = AdapterListActivities(list) { activity: Activity ->
-                onClickItemList(activity)
+
+            Log.d("SANTI-ACTI", "$list")
+
+            if (activityList != null) {
+                recycler.adapter = AdapterListActivities(activityList!!) { activity: Activity ->
+                    onClickItemList(activity)
+                }
             }
 
         }

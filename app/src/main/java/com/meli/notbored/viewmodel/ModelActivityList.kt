@@ -4,8 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.meli.notbored.domain.Activity
-import com.meli.notbored.domain.ServiceActivities
+import com.meli.notbored.service.ServiceActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ModelActivityList: ViewModel(){
 
@@ -28,17 +31,24 @@ class ModelActivityList: ViewModel(){
         return this.participantNumber
     }
 
-    private val  listOfActivityList: MutableLiveData<MutableList<Activity>> by lazy {
-        MutableLiveData<MutableList<Activity>>().also {
-            it.value = loadUserList()
-        }
-    }
+    //list
+    private val listOfActivityList = MutableLiveData<MutableList<Activity>>()
 
     fun getList(): LiveData<MutableList<Activity>> {
+        Log.d("SANTI-MODEL", "${listOfActivityList.value}")
         return listOfActivityList
     }
 
-    private fun loadUserList(): MutableList<Activity>{
-      return ServiceActivities.getList()
+    fun loadUserList(){
+        viewModelScope.launch(Dispatchers.IO) {
+            getActivitiesFromServer()?.let {
+                listOfActivityList.postValue(it)
+                Log.d("SANTI-cou", "$it")
+            }
+        }
+    }
+
+    private suspend fun getActivitiesFromServer(): MutableList<Activity>? {
+        return ServiceActivity.getActivities()
     }
 }
