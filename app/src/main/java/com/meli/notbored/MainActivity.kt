@@ -66,8 +66,7 @@ class MainActivity : AppCompatActivity(), TextWatcher {
                     "Participant number cannot be zero!",
                     Toast.LENGTH_LONG
                 ).show()
-            }
-            else if (participantes > 0 && checkBoxTerms.isChecked) {
+            } else if (participantes > 0 && checkBoxTerms.isChecked) {
                 binding.btnStart.isEnabled = true
             }
         }
@@ -82,14 +81,16 @@ class MainActivity : AppCompatActivity(), TextWatcher {
     }
 
     private fun checkBoxFilled() {
-        if (checkBoxTerms.isChecked) binding.btnStart.isEnabled = true
-        else Toast.makeText(
-            applicationContext,
-            "Please check this box if you want to proceed.",
-            Toast.LENGTH_LONG
-        ).show()
-        binding.btnStart.isEnabled = false
-
+        if (checkBoxTerms.isChecked)  {
+            binding.btnStart.isEnabled = true
+        }
+        else {
+            Toast.makeText(
+                applicationContext,
+                "Please check this box if you want to proceed.",
+                Toast.LENGTH_LONG).show()
+            binding.btnStart.isEnabled = false
+        }
     }
 
     //fragment whit the Terms and Conditions of the app
